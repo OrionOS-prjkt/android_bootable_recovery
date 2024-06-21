@@ -734,7 +734,7 @@ static void log_failure_code(ErrorCode code, const std::string& update_package) 
 }
 
 std::string getProcessedVersion() {
-    std::string full_version = android::base::GetProperty("ro.crdroid.build.version", "(unknown)");
+    std::string full_version = android::base::GetProperty("ro.orion.build.version", "(unknown)");
     std::vector<std::string> parts;
     std::stringstream ss(full_version);
     std::string item;
@@ -883,7 +883,7 @@ Device::BuiltinAction start_recovery(Device* device, const std::vector<std::stri
   std::vector<std::string> title_lines = {
     "Version " + getProcessedVersion(),
   };
-  title_lines.push_back("Product name - " + android::base::GetProperty("ro.product.device", ""));
+  title_lines.push_back("Product name: " + android::base::GetProperty("ro.product.device", ""));
   if (android::base::GetBoolProperty("ro.build.ab_update", false)) {
     std::string slot = android::base::GetProperty("ro.boot.slot_suffix", "");
     if (android::base::StartsWith(slot, "_")) slot.erase(0, 1);
